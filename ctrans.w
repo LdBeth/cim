@@ -94,8 +94,7 @@ likely the indices are sparse, a negative value indicates not found.
 @<Lookup in |lvl2|@>=
 {
 int index = lvl2[(key[0]-'a')*26+(key[1]-'a')];
-if (index < 0) return nil;
-else return &dict[index];
+return ? (index < 0) nil : &dict[index];
 }
 
 @ Find in the dictionary. Since the indices are very sparse after
@@ -232,7 +231,7 @@ int natural = 0;
 #include <libc.h>
 #include <ctype.h>
 
-@ The |main()| function starts the daemon process and call |exits()|.
+@ The |main()| function starts the daemon process and call |exits(nil)|.
 
 @c
 @<Declarations@>@;
@@ -245,7 +244,7 @@ void main(int argc, char **argv) {
   USED(argv);
 
   @<Setup keyboard@>@;
-  if(fork()) exits(0);
+  if(fork()) exits(nil);
 
   @<Key translation loop@>@;
 }
