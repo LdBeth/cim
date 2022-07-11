@@ -38,7 +38,11 @@ original one.
 \A6.
 \U27.\fi
 
-\M{4}\B\X4:Shadowing {\tt/dev/kbd}\X${}\E{}$\6
+\M{4}The call \PB{$\\{bind}(\.{"\#|"},\\{dir},\.{MREPL})$} would create a pair
+of pipes named
+{\tt data} and {\tt data1} in \PB{\\{dir}}.
+
+\Y\B\4\X4:Shadowing {\tt/dev/kbd}\X${}\E{}$\6
 \&{if} ${}(\\{bind}(\.{"\#|"},\39\.{"/n/temp"},\39\.{MREPL})<\T{0})\3{-1}{}$\1\5
 \\{sysfatal}(\.{"bind\ /n/temp:\ \%r"});\2\6
 \&{if} ${}((\\{newkbd}\K\\{open}(\.{"/n/temp/data1"},\39\.{OWRITE}))<\T{0})%

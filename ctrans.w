@@ -35,7 +35,10 @@ if((kbd = open("/dev/kbd", OREAD)) < 0)@|
 @ @<Variables@>=
 int kbd, newkbd;
 
-@ @<Shadowing...@>=
+@ The call |bind("#|", dir, MREPL)| would create a pair of pipes named
+{\tt data} and {\tt data1} in |dir|.
+
+@<Shadowing...@>=
 if(bind("#|", "/n/temp", MREPL) < 0)@|
   sysfatal("bind /n/temp: %r");
 if((newkbd = open("/n/temp/data1", OWRITE)) < 0)@|
