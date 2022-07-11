@@ -1,0 +1,38 @@
+\I\X20:Backspace\X
+\Us16\ET17.
+\I\X23:Copy input character to input buffer\X
+\U14.
+\I\X7, 8:Declarations\X
+\U27.
+\I\X24:Directly write to output\X
+\U14.
+\I\X18, 21, 25:Global states\X
+\U27.
+\I\X15:Handle mode change and selection\X
+\U14.
+\I\X5:Key translation loop\X
+\U27.
+\I\X13:Linear search\X
+\U11.
+\I\X9:Lookup in \PB{\\{lvl1}}\X
+\U11.
+\I\X10:Lookup in \PB{\\{lvl2}}\X
+\U11.
+\I\X22:Reset state\X
+\U15.
+\I\X17:Rotate selection\X
+\U15.
+\I\X16:Search and output\X
+\U14.
+\I\X2:Setup keyboard\X
+\U27.
+\I\X4:Shadowing {\tt/dev/kbd}\X
+\U2.
+\I\X12:Speedup with \PB{\\{lvl2}}\X
+\U11.
+\I\X11, 14:Subroutines\X
+\U27.
+\I\X3, 6:Variables\X
+\U27.
+\I\X19:Write current candidate\X
+\Us16\ET17.
