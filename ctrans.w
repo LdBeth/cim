@@ -1,4 +1,4 @@
-% -*- mode:TeX -*-
+% -*- mode:cweb -*-
 \def\title{CIM - The Cangjie Input Method for 9front}
 
 @*Introduction. This program translates input from {\tt /dev/kbd} to
