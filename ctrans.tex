@@ -113,10 +113,7 @@ likely the indices are sparse, a negative value indicates not found.
 ${}\{{}$\1\6
 \&{int} \\{index}${}\K\\{lvl2}[(\\{key}[\T{0}]-\.{'a'})*\T{26}+(\\{key}[\T{1}]-%
 \.{'a'})];{}$\7
-\&{if} ${}(\\{index}<\T{0}){}$\1\5
-\&{return} \\{nil};\2\6
-\&{else}\1\5
-\&{return} ${}{\AND}\\{dict}[\\{index}];{}$\2\6
+\&{return} ${}(\\{index}<\T{0})\?\\{nil}:{\AND}\\{dict}[\\{index}];{}$\6
 \4${}\}{}$\2\par
 \U11.\fi
 
@@ -292,7 +289,7 @@ $\\{write}(\\{outfd},\39\\{oldbuf},\39\|n){}$;\par
 \fi
 
 \M{27}The \PB{\\{main}(\,)} function starts the daemon process and call \PB{%
-\\{exits}(\,)}.
+\\{exits}(\\{nil})}.
 
 \Y\B\X7:Declarations\X\6
 \X18:Global states\X\6
@@ -305,7 +302,7 @@ ${}\{{}$\1\6
 \.{USED}(\\{argv});\6
 \X2:Setup keyboard\X\6
 \&{if} (\\{fork}(\,))\1\5
-\\{exits}(\T{0});\2\6
+\\{exits}(\\{nil});\2\6
 \X5:Key translation loop\X\6
 \4${}\}{}$\2\par
 \fi

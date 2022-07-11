@@ -94,7 +94,7 @@ likely the indices are sparse, a negative value indicates not found.
 @<Lookup in |lvl2|@>=
 {
 int index = lvl2[(key[0]-'a')*26+(key[1]-'a')];
-return ? (index < 0) nil : &dict[index];
+return (index < 0) ? nil : &dict[index];
 }
 
 @ Find in the dictionary. Since the indices are very sparse after

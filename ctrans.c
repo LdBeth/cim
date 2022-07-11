@@ -68,7 +68,7 @@ case 2:
 
 {
 int index= lvl2[(key[0]-'a')*26+(key[1]-'a')];
-return?(index<0)nil:&dict[index];
+return(index<0)?nil:&dict[index];
 }
 
 /*:10*/
