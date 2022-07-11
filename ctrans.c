@@ -159,7 +159,7 @@ return;
 }else/*15:*/
 #line 155 "ctrans.w"
 
-if(oldbuf[1]==5){
+if(oldbuf[1]==20){
 natural= 1;
 /*22:*/
 #line 213 "ctrans.w"

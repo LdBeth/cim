@@ -1,5 +1,5 @@
 \input cwebmac
-% -*- mode:TeX -*-
+% -*- mode:cweb -*-
 \def\title{CIM - The Cangjie Input Method for 9front}
 
 
@@ -11,7 +11,7 @@ bigger dictionary.
 The usage is the almost the same as {\tt ktrans}: just invoke {\tt
 cim} before {\tt rio}.
 
-{\tt \^{}E} gives you English mode, {\tt \^{}N} enters Cangjie mode.
+{\tt \^{}T} gives you English mode, {\tt \^{}N} enters Cangjie mode.
 {\tt \^{}L} rotates selection.
 
 I know you might want Pinyin but Cangjie is a little bit easier to
@@ -189,8 +189,8 @@ ${}\{{}$\1\6
 \fi
 
 \M{15}\B\X15:Handle mode change and selection\X${}\E{}$\6
-\&{if} ${}(\\{oldbuf}[\T{1}]\E\T{5}){}$\5
-${}\{{}$\SHC{ {\tt \^{}E} }\1\6
+\&{if} ${}(\\{oldbuf}[\T{1}]\E\T{20}){}$\5
+${}\{{}$\SHC{ {\tt \^{}T} }\1\6
 ${}\\{natural}\K\T{1};{}$\6
 \X22:Reset state\X\6
 \&{return};\6

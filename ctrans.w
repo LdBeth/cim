@@ -9,7 +9,7 @@ bigger dictionary.
 The usage is the almost the same as {\tt ktrans}: just invoke {\tt
 cim} before {\tt rio}.
 
-{\tt \^{}E} gives you English mode, {\tt \^{}N} enters Cangjie mode. 
+{\tt \^{}T} gives you English mode, {\tt \^{}N} enters Cangjie mode. 
 {\tt \^{}L} rotates selection.
 
 I know you might want Pinyin but Cangjie is a little bit easier to
@@ -153,7 +153,7 @@ void nextstate(char *oldbuf, int n, int outfd) {
 }
 
 @ @<Handle mode change...@>=
-if (oldbuf[1] == 5) { // {\tt \^{}E}
+if (oldbuf[1] == 20) { // {\tt \^{}T}
    natural = 1;
    @<Reset state@>@;
    return;
