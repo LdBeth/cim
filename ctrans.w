@@ -85,7 +85,7 @@ extern const int lvl2[];
 @<Lookup in |lvl1|@>=
 return &dict[lvl1[key[0]-'a']];
 
-@ |lvl2| contains indices from |"aa"|, |"ba"| to |"zz"|. Since it is
+@ |lvl2| contains indices from |"aa"|, |"ab"| to |"zz"|. Since it is
 likely the indices are sparse, a negative value indicates not found.
 
 @<Lookup in |lvl2|@>=
