@@ -224,7 +224,7 @@ write(outfd, "c\b\0", 3);
 @<Global states@>=
 char input[20];
 int len = 0;
-Map *laststate = nil;
+const Map *laststate = nil;
 
 @ @<Reset state@>=
 len = 0;

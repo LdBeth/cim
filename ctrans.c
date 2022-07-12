@@ -37,7 +37,7 @@ Rune*candidate;
 
 char input[20];
 int len= 0;
-Map*laststate= nil;
+const Map*laststate= nil;
 
 /*:22*//*27:*/
 #line 246 "ctrans.w"
