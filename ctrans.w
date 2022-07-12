@@ -133,7 +133,7 @@ int keycode;
 for @<First none |0| key until next |0|@> {
   cmp = (table[i].key >> (5 * (3 - (len - 2)))) - keycode;
   if (cmp == 0) return &table[i];
-  else if (cmp < 0) return nil;
+  else if (cmp > 0) return nil;
 }
 return nil;
 }
