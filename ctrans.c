@@ -1,12 +1,12 @@
 /*29:*/
-#line 261 "ctrans.w"
+#line 259 "ctrans.w"
 
 #include <u.h> 
 #include <libc.h> 
 #include <ctype.h> 
 
 /*:29*//*30:*/
-#line 268 "ctrans.w"
+#line 266 "ctrans.w"
 
 /*7:*/
 #line 75 "ctrans.w"
@@ -25,27 +25,27 @@ extern const int lvl1[];
 extern const int lvl2[];
 
 /*:8*/
-#line 269 "ctrans.w"
+#line 267 "ctrans.w"
 
 /*18:*/
-#line 197 "ctrans.w"
+#line 195 "ctrans.w"
 
 int natural= 0;
 
 /*:18*//*21:*/
-#line 226 "ctrans.w"
+#line 224 "ctrans.w"
 
 Rune*candidate;
 
 /*:21*//*24:*/
-#line 238 "ctrans.w"
+#line 236 "ctrans.w"
 
 char input[20];
 int len= 0;
 const Map*laststate= nil;
 
 /*:24*/
-#line 270 "ctrans.w"
+#line 268 "ctrans.w"
 
 /*11:*/
 #line 105 "ctrans.w"
@@ -81,29 +81,27 @@ if(table!=nil)
 
 {
 int cmp;
-int keycode,keylen;
+int keycode;
 /*14:*/
 #line 142 "ctrans.w"
 
-keycode= 0;
-for(keylen= 2;keylen<len;keylen++){
+for(int i= 2;i<len;i+){
 keycode<<= 5;
-keycode+= key[keylen]-'a'+1;
+keycode+= key[i]-'a'+1;
 }
-keylen-= 2;
 
 /*:14*/
 #line 132 "ctrans.w"
 
 for/*15:*/
-#line 152 "ctrans.w"
+#line 150 "ctrans.w"
 
 (int i= (table[0].key)?0:1;table[i].key;i++)
 
 /*:15*/
 #line 133 "ctrans.w"
 {
-cmp= (table[i].key>>(3-keylen))-keycode;
+cmp= (table[i].key>>(5*(3-(len-2))))-keycode;
 if(cmp==0)return&table[i];
 else if(cmp<0)return nil;
 }
@@ -126,7 +124,7 @@ return match(key,len,match(key,2,nil));
 }
 
 /*:11*//*16:*/
-#line 157 "ctrans.w"
+#line 155 "ctrans.w"
 
 void nextstate(char*oldbuf,int n,int outfd){
 
@@ -136,17 +134,17 @@ laststate= nil;
 }
 if(!natural&&islower(oldbuf[1])){
 /*26:*/
-#line 247 "ctrans.w"
+#line 245 "ctrans.w"
 
 input[len]= oldbuf[1];
 len+= 1;
 input[len]= '\0';
 
 /*:26*/
-#line 165 "ctrans.w"
+#line 163 "ctrans.w"
 
 /*19:*/
-#line 202 "ctrans.w"
+#line 200 "ctrans.w"
 
 const Map*result;
 Search:
@@ -154,145 +152,145 @@ result= match(input,len,laststate);
 if(result!=nil){
 if(laststate!=nil)
 /*23:*/
-#line 234 "ctrans.w"
+#line 232 "ctrans.w"
 
 write(outfd,"c\b\0",3);
 
 /*:23*/
-#line 208 "ctrans.w"
+#line 206 "ctrans.w"
 
 candidate= result->val;
 /*22:*/
-#line 229 "ctrans.w"
+#line 227 "ctrans.w"
 
 char buf[128];
 int n= snprint(buf,sizeof(buf),"c%C",*candidate)+1;
 write(outfd,buf,n);
 
 /*:22*/
-#line 210 "ctrans.w"
+#line 208 "ctrans.w"
 
 laststate= result;
 }else if(laststate!=nil){
 /*27:*/
-#line 252 "ctrans.w"
+#line 250 "ctrans.w"
 
 input[0]= input[len-1];
 input[1]= '\0';
 len= 1;
 
 /*:27*/
-#line 213 "ctrans.w"
+#line 211 "ctrans.w"
 
 laststate= nil;
 goto Search;
 }
 
 /*:19*/
-#line 166 "ctrans.w"
+#line 164 "ctrans.w"
 
 return;
 }else/*17:*/
-#line 173 "ctrans.w"
+#line 171 "ctrans.w"
 
 if(oldbuf[1]==20){
 natural= 1;
 /*25:*/
-#line 243 "ctrans.w"
+#line 241 "ctrans.w"
 
 len= 0;
 laststate= nil;
 
 /*:25*/
-#line 176 "ctrans.w"
+#line 174 "ctrans.w"
 
 return;
 }
 else if(oldbuf[1]==14){
 natural= 0;
 /*25:*/
-#line 243 "ctrans.w"
+#line 241 "ctrans.w"
 
 len= 0;
 laststate= nil;
 
 /*:25*/
-#line 181 "ctrans.w"
+#line 179 "ctrans.w"
 
 return;
 }
 else if(!natural&&oldbuf[1]==' '){
 /*25:*/
-#line 243 "ctrans.w"
+#line 241 "ctrans.w"
 
 len= 0;
 laststate= nil;
 
 /*:25*/
-#line 185 "ctrans.w"
+#line 183 "ctrans.w"
 
 return;
 }
 else if(oldbuf[1]==12){
 /*20:*/
-#line 218 "ctrans.w"
+#line 216 "ctrans.w"
 
 if(laststate!=nil){
 /*23:*/
-#line 234 "ctrans.w"
+#line 232 "ctrans.w"
 
 write(outfd,"c\b\0",3);
 
 /*:23*/
-#line 220 "ctrans.w"
+#line 218 "ctrans.w"
 
 candidate++;
 if(!*candidate)candidate= laststate->val;
 /*22:*/
-#line 229 "ctrans.w"
+#line 227 "ctrans.w"
 
 char buf[128];
 int n= snprint(buf,sizeof(buf),"c%C",*candidate)+1;
 write(outfd,buf,n);
 
 /*:22*/
-#line 223 "ctrans.w"
+#line 221 "ctrans.w"
 
 }
 
 /*:20*/
-#line 189 "ctrans.w"
+#line 187 "ctrans.w"
 
 return;
 }
 else if(oldbuf[1]=='\b'){
 /*25:*/
-#line 243 "ctrans.w"
+#line 241 "ctrans.w"
 
 len= 0;
 laststate= nil;
 
 /*:25*/
-#line 193 "ctrans.w"
+#line 191 "ctrans.w"
 
 }
 
 /*:17*/
-#line 168 "ctrans.w"
+#line 166 "ctrans.w"
 
 /*28:*/
-#line 257 "ctrans.w"
+#line 255 "ctrans.w"
 
 write(outfd,oldbuf,n);
 
 /*:28*/
-#line 169 "ctrans.w"
+#line 167 "ctrans.w"
 
 return;
 }
 
 /*:16*/
-#line 271 "ctrans.w"
+#line 269 "ctrans.w"
 
 void main(int argc,char**argv){
 /*3:*/
@@ -307,7 +305,7 @@ int n;
 char buf[128];
 
 /*:6*/
-#line 273 "ctrans.w"
+#line 271 "ctrans.w"
 ;
 
 USED(argc);
@@ -334,7 +332,7 @@ unmount(nil,"/n/temp");
 
 
 /*:2*/
-#line 278 "ctrans.w"
+#line 276 "ctrans.w"
 
 if(fork())exits(nil);
 
@@ -349,7 +347,7 @@ else nextstate(buf,n,newkbd);
 }
 
 /*:5*/
-#line 281 "ctrans.w"
+#line 279 "ctrans.w"
 
 }
 

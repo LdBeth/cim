@@ -128,10 +128,10 @@ the key. If the key's length is less than 3 it is only stored as |0|.
 @<Linear search@>=
 {
 int cmp;
-int keycode, keylen;
+int keycode;
 @<Compute keycode@>@;
 for @<First none |0| key until next |0|@> {
-  cmp = (table[i].key >> (3 - keylen)) - keycode;
+  cmp = (table[i].key >> (5 * (3 - (len - 2)))) - keycode;
   if (cmp == 0) return &table[i];
   else if (cmp < 0) return nil;
 }
@@ -140,12 +140,10 @@ return nil;
 
 @ Each alphabet occupies 5 bits. There are 3 alphabets in the keycode.
 @<Compute keycode@>=
-keycode = 0;
-for (keylen = 2; keylen < len; keylen++) {
+for (int i = 2; i < len; i+) {
   keycode <<= 5;
-  keycode += key[keylen] - 'a' + 1;
+  keycode += key[i] - 'a' + 1;
 }
-keylen -= 2;
 
 @ When a two character key doesn't exist, the index for next key with
 same prefix is stored.
