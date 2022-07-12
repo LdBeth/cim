@@ -1,12 +1,12 @@
 /*28:*/
-#line 249 "ctrans.w"
+#line 250 "ctrans.w"
 
 #include <u.h> 
 #include <libc.h> 
 #include <ctype.h> 
 
 /*:28*//*29:*/
-#line 256 "ctrans.w"
+#line 257 "ctrans.w"
 
 /*7:*/
 #line 74 "ctrans.w"
@@ -25,27 +25,27 @@ extern const int lvl1[];
 extern const int lvl2[];
 
 /*:8*/
-#line 257 "ctrans.w"
+#line 258 "ctrans.w"
 
 /*19:*/
-#line 211 "ctrans.w"
+#line 212 "ctrans.w"
 
 Rune*candidate;
 
 /*:19*//*22:*/
-#line 223 "ctrans.w"
+#line 224 "ctrans.w"
 
 char input[20];
 int len= 0;
 Map*laststate= nil;
 
 /*:22*//*27:*/
-#line 245 "ctrans.w"
+#line 246 "ctrans.w"
 
 int natural= 0;
 
 /*:27*/
-#line 258 "ctrans.w"
+#line 259 "ctrans.w"
 
 /*11:*/
 #line 104 "ctrans.w"
@@ -123,7 +123,7 @@ laststate= nil;
 }
 if(!natural&&islower(oldbuf[1])){
 /*24:*/
-#line 232 "ctrans.w"
+#line 233 "ctrans.w"
 
 input[len]= oldbuf[1];
 len+= 1;
@@ -135,40 +135,41 @@ input[len]= '\0';
 /*17:*/
 #line 189 "ctrans.w"
 
+Map*result;
 Search:
-Map*result= match(input,len,laststate);
+result= match(input,len,laststate);
 if(result!=nil){
 if(laststate!=nil)
 /*21:*/
-#line 219 "ctrans.w"
+#line 220 "ctrans.w"
 
 write(outfd,"c\b\0",3);
 
 /*:21*/
-#line 194 "ctrans.w"
+#line 195 "ctrans.w"
 
 candidate= result->val;
 /*20:*/
-#line 214 "ctrans.w"
+#line 215 "ctrans.w"
 
 char buf[128];
 int n= snprint(buf,sizeof(buf),"c%C",*candidate)+1;
 write(outfd,buf,n);
 
 /*:20*/
-#line 196 "ctrans.w"
+#line 197 "ctrans.w"
 
 laststate= result;
 }else if(laststate!=nil){
 /*25:*/
-#line 237 "ctrans.w"
+#line 238 "ctrans.w"
 
 input[0]= input[len-1];
 input[1]= '\0';
 len= 1;
 
 /*:25*/
-#line 199 "ctrans.w"
+#line 200 "ctrans.w"
 
 goto Search;
 }
@@ -183,7 +184,7 @@ return;
 if(oldbuf[1]==20){
 natural= 1;
 /*23:*/
-#line 228 "ctrans.w"
+#line 229 "ctrans.w"
 
 len= 0;
 laststate= nil;
@@ -196,7 +197,7 @@ return;
 else if(oldbuf[1]==14){
 natural= 0;
 /*23:*/
-#line 228 "ctrans.w"
+#line 229 "ctrans.w"
 
 len= 0;
 laststate= nil;
@@ -208,7 +209,7 @@ return;
 }
 else if(!natural&&oldbuf[1]==' '){
 /*23:*/
-#line 228 "ctrans.w"
+#line 229 "ctrans.w"
 
 len= 0;
 laststate= nil;
@@ -220,28 +221,28 @@ return;
 }
 else if(oldbuf[1]==12){
 /*18:*/
-#line 203 "ctrans.w"
+#line 204 "ctrans.w"
 
 if(laststate!=nil){
 /*21:*/
-#line 219 "ctrans.w"
+#line 220 "ctrans.w"
 
 write(outfd,"c\b\0",3);
 
 /*:21*/
-#line 205 "ctrans.w"
+#line 206 "ctrans.w"
 
 candidate++;
 if(!*candidate)candidate= laststate->val;
 /*20:*/
-#line 214 "ctrans.w"
+#line 215 "ctrans.w"
 
 char buf[128];
 int n= snprint(buf,sizeof(buf),"c%C",*candidate)+1;
 write(outfd,buf,n);
 
 /*:20*/
-#line 208 "ctrans.w"
+#line 209 "ctrans.w"
 
 }
 
@@ -252,7 +253,7 @@ return;
 }
 else if(oldbuf[1]=='\b'){
 /*23:*/
-#line 228 "ctrans.w"
+#line 229 "ctrans.w"
 
 len= 0;
 laststate= nil;
@@ -266,7 +267,7 @@ laststate= nil;
 #line 159 "ctrans.w"
 
 /*26:*/
-#line 242 "ctrans.w"
+#line 243 "ctrans.w"
 
 write(outfd,oldbuf,n);
 
@@ -277,7 +278,7 @@ return;
 }
 
 /*:15*/
-#line 259 "ctrans.w"
+#line 260 "ctrans.w"
 
 void main(int argc,char**argv){
 /*3:*/
@@ -292,7 +293,7 @@ int n;
 char buf[128];
 
 /*:6*/
-#line 261 "ctrans.w"
+#line 262 "ctrans.w"
 ;
 
 USED(argc);
@@ -319,7 +320,7 @@ unmount(nil,"/n/temp");
 
 
 /*:2*/
-#line 266 "ctrans.w"
+#line 267 "ctrans.w"
 
 if(fork())exits(nil);
 
@@ -334,7 +335,7 @@ else nextstate(buf,n,newkbd);
 }
 
 /*:5*/
-#line 269 "ctrans.w"
+#line 270 "ctrans.w"
 
 }
 

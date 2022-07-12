@@ -233,8 +233,9 @@ ${}\{{}$\1\6
 \M{17}The only \PB{\&{goto}} statement in this program. It enables auto start
 of next input if the last character is already complete.
 \Y\B\4\X17:Search and output\X${}\E{}$\6
+\&{Map} ${}{*}\\{result};{}$\7
 \4\\{Search}:\5
-\&{Map} ${}{*}\\{result}\K\\{match}(\\{input},\39\\{len},\39\\{laststate});{}$\7
+${}\\{result}\K\\{match}(\\{input},\39\\{len},\39\\{laststate});{}$\6
 \&{if} ${}(\\{result}\I\\{nil}){}$\5
 ${}\{{}$\1\6
 \&{if} ${}(\\{laststate}\I\\{nil}){}$\1\5
