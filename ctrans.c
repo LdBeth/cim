@@ -135,7 +135,7 @@ input[len]= '\0';
 /*17:*/
 #line 189 "ctrans.w"
 
-Map*result;
+const Map*result;
 Search:
 result= match(input,len,laststate);
 if(result!=nil){

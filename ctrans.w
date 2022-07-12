@@ -187,7 +187,7 @@ else if (oldbuf[1] == '\b') {
 @ The only |goto| statement in this program. It enables auto start
 of next input if the last character is already complete.
 @<Search and...@>=
-Map *result;
+const Map *result;
 Search:
 result = match(input, len, laststate);
 if (result != nil) {
