@@ -283,8 +283,8 @@ void main(int argc, char **argv) {
 }
 
 @ @<Test dictionary@>=
-const Map result = match(argv[1], strlen(argv[1]), nil);
+const Map *result = match(argv[1], strlen(argv[1]), nil);
 if (result == nil) print("not found!\n");
-else print("%S\n", result.val);
+else print("%S\n", result->val);
 
 @*Bugs. The translation could fail if typing is too fast.

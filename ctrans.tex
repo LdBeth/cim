@@ -350,12 +350,12 @@ ${}\{{}$\1\6
 \fi
 
 \M{31}\B\X31:Test dictionary\X${}\E{}$\6
-\&{const} \&{Map} \\{result}${}\K\\{match}(\\{argv}[\T{1}],\39\\{strlen}(%
+\&{const} \&{Map} ${}{*}\\{result}\K\\{match}(\\{argv}[\T{1}],\39\\{strlen}(%
 \\{argv}[\T{1}]),\39\\{nil});{}$\7
 \&{if} ${}(\\{result}\E\\{nil}){}$\1\5
 \\{print}(\.{"not\ found!\\n"});\2\6
 \&{else}\1\5
-${}\\{print}(\.{"\%S\\n"},\39\\{result}.\\{val}){}$;\2\par
+${}\\{print}(\.{"\%S\\n"},\39\\{result}\MG\\{val}){}$;\2\par
 \U30.\fi
 
 \N{1}{32}Bugs. The translation could fail if typing is too fast.

@@ -313,9 +313,9 @@ if(argc> 1){
 /*31:*/
 #line 285 "ctrans.w"
 
-const Map result= match(argv[1],strlen(argv[1]),nil);
+const Map*result= match(argv[1],strlen(argv[1]),nil);
 if(result==nil)print("not found!\n");
-else print("%S\n",result.val);
+else print("%S\n",result->val);
 
 /*:31*/
 #line 275 "ctrans.w"
