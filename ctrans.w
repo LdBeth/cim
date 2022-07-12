@@ -140,7 +140,7 @@ return nil;
 
 @ Each alphabet occupies 5 bits. There are 3 alphabets in the keycode.
 @<Compute keycode@>=
-for (int i = 2; i < len; i+) {
+for (int i = 2; i < len; i++) {
   keycode <<= 5;
   keycode += key[i] - 'a' + 1;
 }

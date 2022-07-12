@@ -85,7 +85,7 @@ int keycode;
 /*14:*/
 #line 142 "ctrans.w"
 
-for(int i= 2;i<len;i+){
+for(int i= 2;i<len;i++){
 keycode<<= 5;
 keycode+= key[i]-'a'+1;
 }
