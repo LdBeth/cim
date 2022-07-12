@@ -120,19 +120,27 @@ const Map *match(const char* key, int len, const Map* table)
 @ @<Speedup with |lvl2|@>=
 return match(key, len, match(key, 2, nil));
 
-@ Using |strncmp| to search keys in the dictionary, since the keys
-are ordered, if the compare result is negative, return |nil|.
+@ Using |strcmp| to search keys in the dictionary, since the keys are
+ordered, if the compare result is negative, return |nil|. The first
+two characters of the dictionary key are omitted for space efficiency.
+If the key's length is less than 3 it is only stored as |nil|.
 
 @<Linear search@>=
 {
 int cmp;
-for (int i = 0; table[i].key; i++) {
-  cmp = strncmp(key, table[i].key, len);
+char *newkey = &key[2];
+for @<First none |nil| key until next |nil|@> {
+  cmp = strcmp(newkey, table[i].key);
   if (cmp == 0) return &table[i];
   else if (cmp < 0) return nil;
 }
 return nil;
 }
+
+@ When a two character key doesn't exist, the index for next key with
+same prefix is stored.
+@<First none |nil|...@>=
+(int i = (table[0].key) ? 0 : 1; table[i].key; i++)
 
 @*State machine. Right now this is a bit of messy.
 

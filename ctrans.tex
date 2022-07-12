@@ -31,12 +31,12 @@ original one.
 \&{if} ${}((\\{kbd}\K\\{open}(\.{"/dev/kbd"},\39\.{OREAD}))<\T{0})\3{-1}{}$\1\5
 \\{sysfatal}(\.{"open\ kbd:\ \%r"});\2\6
 \X4:Shadowing {\tt/dev/kbd}\X\par
-\U27.\fi
+\U28.\fi
 
 \M{3}\B\X3:Variables\X${}\E{}$\6
 \&{int} \\{kbd}${},{}$ \\{newkbd};\par
 \A6.
-\U27.\fi
+\U28.\fi
 
 \M{4}The call \PB{$\\{bind}(\.{"\#|"},\\{dir},\.{MREPL})$} would create a pair
 of pipes named
@@ -69,7 +69,7 @@ ${}\\{write}(\\{newkbd},\39\\{buf},\39\|n);{}$\2\6
 \&{else}\1\5
 ${}\\{nextstate}(\\{buf},\39\|n,\39\\{newkbd});{}$\2\6
 \4${}\}{}$\2\par
-\U27.\fi
+\U28.\fi
 
 \M{6}\B\X3:Variables\X${}\mathrel+\E{}$\6
 \&{int} \|n;\6
@@ -92,7 +92,7 @@ with lexicographical order.
 ${}\};{}$\6
 \&{extern} \&{const} \&{Map} \\{dict}[\,];\par
 \A8.
-\U27.\fi
+\U28.\fi
 
 \M{8}There are two precomputed indices to speed up lookup.
 \Y\B\4\X7:Declarations\X${}\mathrel+\E{}$\6
@@ -138,23 +138,27 @@ ${}\{{}$\1\6
 \X12:Speedup with \PB{\\{lvl2}}\X\2\6
 \4${}\}{}$\2\6
 \4${}\}{}$\2\par
-\A14.
-\U27.\fi
+\A15.
+\U28.\fi
 
 \M{12}\B\X12:Speedup with \PB{\\{lvl2}}\X${}\E{}$\6
 \&{return} \\{match}${}(\\{key},\39\\{len},\39\\{match}(\\{key},\39\T{2},\39%
 \\{nil})){}$;\par
 \U11.\fi
 
-\M{13}Using \PB{\\{strncmp}} to search keys in the dictionary, since the keys
-are ordered, if the compare result is negative, return \PB{\\{nil}}.
+\M{13}Using \PB{\\{strcmp}} to search keys in the dictionary, since the keys
+are
+ordered, if the compare result is negative, return \PB{\\{nil}}. The first
+two characters of the dictionary key are omitted for space efficiency.
+If the key's length is less than 3 it is only stored as \PB{\\{nil}}.
 
 \Y\B\4\X13:Linear search\X${}\E{}$\6
 ${}\{{}$\1\6
-\&{int} \\{cmp};\7
-\&{for} (\&{int} \|i${}\K\T{0};{}$ ${}\\{table}[\|i].\\{key};{}$ ${}\|i\PP){}$\5
+\&{int} \\{cmp};\6
+\&{char} ${}{*}\\{newkey}\K{\AND}\\{key}[\T{2}];{}$\7
+\&{for} \X14:First none \PB{\\{nil}} key until next \PB{\\{nil}}\X\5
 ${}\{{}$\1\6
-${}\\{cmp}\K\\{strncmp}(\\{key},\39\\{table}[\|i].\\{key},\39\\{len});{}$\6
+${}\\{cmp}\K\\{strcmp}(\\{newkey},\39\\{table}[\|i].\\{key});{}$\6
 \&{if} ${}(\\{cmp}\E\T{0}){}$\1\5
 \&{return} ${}{\AND}\\{table}[\|i];{}$\2\6
 \&{else} \&{if} ${}(\\{cmp}<\T{0}){}$\1\5
@@ -164,7 +168,14 @@ ${}\\{cmp}\K\\{strncmp}(\\{key},\39\\{table}[\|i].\\{key},\39\\{len});{}$\6
 \4${}\}{}$\2\par
 \U11.\fi
 
-\N{1}{14}State machine. Right now this is a bit of messy.
+\M{14}When a two character key doesn't exist, the index for next key with
+same prefix is stored.
+\Y\B\4\X14:First none \PB{\\{nil}} key until next \PB{\\{nil}}\X${}\E{}$\6
+(\&{int} \|i${}\K(\\{table}[\T{0}].\\{key})\?\T{0}:\T{1};{}$ ${}\\{table}[\|i].%
+\\{key};{}$ ${}\|i\PP{}$)\par
+\U13.\fi
+
+\N{1}{15}State machine. Right now this is a bit of messy.
 
 \Y\B\4\X11:Subroutines\X${}\mathrel+\E{}$\6
 \1\1\&{void} \\{nextstate}(\&{char} ${}{*}\\{oldbuf},\39{}$\&{int} \|n${},%
@@ -177,122 +188,122 @@ ${}\\{laststate}\K\\{nil};{}$\6
 \4${}\}{}$\2\6
 \&{if} ${}(\R\\{natural}\W\\{islower}(\\{oldbuf}[\T{1}])){}$\5
 ${}\{{}$\1\6
-\X23:Copy input character to input buffer\X\6
-\X16:Search and output\X\6
+\X24:Copy input character to input buffer\X\6
+\X17:Search and output\X\6
 \&{return};\6
 \4${}\}{}$\2\6
 \&{else}\1\5
-\X15:Handle mode change and selection\X\2\6
-\X24:Directly write to output\X\6
+\X16:Handle mode change and selection\X\2\6
+\X25:Directly write to output\X\6
 \&{return};\6
 \4${}\}{}$\2\par
 \fi
 
-\M{15}\B\X15:Handle mode change and selection\X${}\E{}$\6
+\M{16}\B\X16:Handle mode change and selection\X${}\E{}$\6
 \&{if} ${}(\\{oldbuf}[\T{1}]\E\T{20}){}$\5
 ${}\{{}$\SHC{ {\tt \^{}T} }\1\6
 ${}\\{natural}\K\T{1};{}$\6
-\X22:Reset state\X\6
+\X23:Reset state\X\6
 \&{return};\6
 \4${}\}{}$\2\6
 \&{else} \&{if} ${}(\\{oldbuf}[\T{1}]\E\T{14}){}$\5
 ${}\{{}$\SHC{ {\tt \^{}N} }\1\6
 ${}\\{natural}\K\T{0};{}$\6
-\X22:Reset state\X\6
+\X23:Reset state\X\6
 \&{return};\6
 \4${}\}{}$\2\6
 \&{else} \&{if} ${}(\R\\{natural}\W\\{oldbuf}[\T{1}]\E\.{'\ '}){}$\5
 ${}\{{}$\1\6
-\X22:Reset state\X\6
+\X23:Reset state\X\6
 \&{return};\6
 \4${}\}{}$\2\6
 \&{else} \&{if} ${}(\\{oldbuf}[\T{1}]\E\T{12}){}$\5
 ${}\{{}$\SHC{ {\tt \^{}L} }\1\6
-\X17:Rotate selection\X\6
+\X18:Rotate selection\X\6
 \&{return};\6
 \4${}\}{}$\2\6
 \&{else} \&{if} ${}(\\{oldbuf}[\T{1}]\E\.{'\\b'}){}$\5
 ${}\{{}$\1\6
-\X22:Reset state\X\6
+\X23:Reset state\X\6
 \4${}\}{}$\2\par
-\U14.\fi
+\U15.\fi
 
-\M{16}\B\X16:Search and output\X${}\E{}$\6
+\M{17}\B\X17:Search and output\X${}\E{}$\6
 \&{Map} ${}{*}\\{result}\K\\{match}(\\{input},\39\\{len},\39\\{laststate});{}$\7
 \&{if} ${}(\\{result}\I\\{nil}){}$\5
 ${}\{{}$\1\6
 \&{if} ${}(\\{laststate}\I\\{nil}){}$\1\5
-\X20:Backspace\X\2\6
+\X21:Backspace\X\2\6
 ${}\\{candidate}\K\\{result}\MG\\{val};{}$\6
-\X19:Write current candidate\X\6
+\X20:Write current candidate\X\6
 ${}\\{laststate}\K\\{result};{}$\6
-\4${}\}{}$\2\par
-\U14.\fi
-
-\M{17}\B\X17:Rotate selection\X${}\E{}$\6
-\&{if} ${}(\\{laststate}\I\\{nil}){}$\5
-${}\{{}$\1\6
-\X20:Backspace\X\6
-${}\\{candidate}\PP;{}$\6
-\&{if} ${}(\R{*}\\{candidate}){}$\1\5
-${}\\{candidate}\K\\{laststate}\MG\\{val};{}$\2\6
-\X19:Write current candidate\X\6
 \4${}\}{}$\2\par
 \U15.\fi
 
-\M{18}\B\X18:Global states\X${}\E{}$\6
-\&{Rune} ${}{*}\\{candidate}{}$;\par
-\As21\ET25.
-\U27.\fi
+\M{18}\B\X18:Rotate selection\X${}\E{}$\6
+\&{if} ${}(\\{laststate}\I\\{nil}){}$\5
+${}\{{}$\1\6
+\X21:Backspace\X\6
+${}\\{candidate}\PP;{}$\6
+\&{if} ${}(\R{*}\\{candidate}){}$\1\5
+${}\\{candidate}\K\\{laststate}\MG\\{val};{}$\2\6
+\X20:Write current candidate\X\6
+\4${}\}{}$\2\par
+\U16.\fi
 
-\M{19}\B\X19:Write current candidate\X${}\E{}$\6
+\M{19}\B\X19:Global states\X${}\E{}$\6
+\&{Rune} ${}{*}\\{candidate}{}$;\par
+\As22\ET26.
+\U28.\fi
+
+\M{20}\B\X20:Write current candidate\X${}\E{}$\6
 \&{char} \\{buf}[\T{128}];\6
 \&{int} \|n${}\K\\{snprint}(\\{buf},\39{}$\&{sizeof} (\\{buf})${},\39\.{"c%
 \%C"},\39{*}\\{candidate})+\T{1};{}$\7
 ${}\\{write}(\\{outfd},\39\\{buf},\39\|n){}$;\par
-\Us16\ET17.\fi
+\Us17\ET18.\fi
 
-\M{20}\B\X20:Backspace\X${}\E{}$\6
+\M{21}\B\X21:Backspace\X${}\E{}$\6
 $\\{write}(\\{outfd},\39\.{"c\\b\\0"},\39\T{3}){}$;\par
-\Us16\ET17.\fi
+\Us17\ET18.\fi
 
-\M{21}These states keeps a record of current input.
-\Y\B\4\X18:Global states\X${}\mathrel+\E{}$\6
+\M{22}These states keeps a record of current input.
+\Y\B\4\X19:Global states\X${}\mathrel+\E{}$\6
 \&{char} \\{input}[\T{20}];\6
 \&{int} \\{len}${}\K\T{0};{}$\6
 \&{Map} ${}{*}\\{laststate}\K\\{nil}{}$;\par
 \fi
 
-\M{22}\B\X22:Reset state\X${}\E{}$\6
+\M{23}\B\X23:Reset state\X${}\E{}$\6
 $\\{len}\K\T{0};{}$\6
 ${}\\{laststate}\K\\{nil}{}$;\par
-\U15.\fi
+\U16.\fi
 
-\M{23}\B\X23:Copy input character to input buffer\X${}\E{}$\6
+\M{24}\B\X24:Copy input character to input buffer\X${}\E{}$\6
 $\\{input}[\\{len}]\K\\{oldbuf}[\T{1}];{}$\6
 ${}\\{len}\MRL{+{\K}}\T{1};{}$\6
 ${}\\{input}[\\{len}]\K\T{0}{}$;\par
-\U14.\fi
+\U15.\fi
 
-\M{24}\B\X24:Directly write to output\X${}\E{}$\6
+\M{25}\B\X25:Directly write to output\X${}\E{}$\6
 $\\{write}(\\{outfd},\39\\{oldbuf},\39\|n){}$;\par
-\U14.\fi
+\U15.\fi
 
-\M{25}\B\X18:Global states\X${}\mathrel+\E{}$\6
+\M{26}\B\X19:Global states\X${}\mathrel+\E{}$\6
 \&{int} \\{natural}${}\K\T{0}{}$;\par
 \fi
 
-\N{1}{26}Program entry. A standard Plan9 C program would use these headers.
+\N{1}{27}Program entry. A standard Plan9 C program would use these headers.
 \Y\B\8\#\&{include} \.{<u.h>}\6
 \8\#\&{include} \.{<libc.h>}\6
 \8\#\&{include} \.{<ctype.h>}\par
 \fi
 
-\M{27}The \PB{\\{main}(\,)} function starts the daemon process and call \PB{%
+\M{28}The \PB{\\{main}(\,)} function starts the daemon process and call \PB{%
 \\{exits}(\\{nil})}.
 
 \Y\B\X7:Declarations\X\6
-\X18:Global states\X\6
+\X19:Global states\X\6
 \X11:Subroutines\X\7
 \1\1\&{void} \\{main}(\&{int} \\{argc}${},\39{}$\&{char} ${}{*}{*}\\{argv})\2%
 \2{}$\6
@@ -307,7 +318,7 @@ ${}\{{}$\1\6
 \4${}\}{}$\2\par
 \fi
 
-\N{1}{28}Bugs. The translation could fail if typing is too fast.
+\N{1}{29}Bugs. The translation could fail if typing is too fast.
 \fi
 
 \inx
