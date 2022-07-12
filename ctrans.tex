@@ -31,12 +31,12 @@ original one.
 \&{if} ${}((\\{kbd}\K\\{open}(\.{"/dev/kbd"},\39\.{OREAD}))<\T{0})\3{-1}{}$\1\5
 \\{sysfatal}(\.{"open\ kbd:\ \%r"});\2\6
 \X4:Shadowing {\tt/dev/kbd}\X\par
-\U28.\fi
+\U29.\fi
 
 \M{3}\B\X3:Variables\X${}\E{}$\6
 \&{int} \\{kbd}${},{}$ \\{newkbd};\par
 \A6.
-\U28.\fi
+\U29.\fi
 
 \M{4}The call \PB{$\\{bind}(\.{"\#|"},\\{dir},\.{MREPL})$} would create a pair
 of pipes named
@@ -69,7 +69,7 @@ ${}\\{write}(\\{newkbd},\39\\{buf},\39\|n);{}$\2\6
 \&{else}\1\5
 ${}\\{nextstate}(\\{buf},\39\|n,\39\\{newkbd});{}$\2\6
 \4${}\}{}$\2\par
-\U28.\fi
+\U29.\fi
 
 \M{6}\B\X3:Variables\X${}\mathrel+\E{}$\6
 \&{int} \|n;\6
@@ -92,7 +92,7 @@ with lexicographical order.
 ${}\};{}$\6
 \&{extern} \&{const} \&{Map} \\{dict}[\,];\par
 \A8.
-\U28.\fi
+\U29.\fi
 
 \M{8}There are two precomputed indices to speed up lookup.
 \Y\B\4\X7:Declarations\X${}\mathrel+\E{}$\6
@@ -139,7 +139,7 @@ ${}\{{}$\1\6
 \4${}\}{}$\2\6
 \4${}\}{}$\2\par
 \A15.
-\U28.\fi
+\U29.\fi
 
 \M{12}\B\X12:Speedup with \PB{\\{lvl2}}\X${}\E{}$\6
 \&{return} \\{match}${}(\\{key},\39\\{len},\39\\{match}(\\{key},\39\T{2},\39%
@@ -196,7 +196,7 @@ ${}\{{}$\1\6
 \4${}\}{}$\2\6
 \&{else}\1\5
 \X16:Handle mode change and selection\X\2\6
-\X25:Directly write to output\X\6
+\X26:Directly write to output\X\6
 \&{return};\6
 \4${}\}{}$\2\par
 \fi
@@ -230,7 +230,10 @@ ${}\{{}$\1\6
 \4${}\}{}$\2\par
 \U15.\fi
 
-\M{17}\B\X17:Search and output\X${}\E{}$\6
+\M{17}The only \PB{\&{goto}} statement in this program. It enables auto start
+of next input if the last character is already complete.
+\Y\B\4\X17:Search and output\X${}\E{}$\6
+\4\\{search}:\5
 \&{Map} ${}{*}\\{result}\K\\{match}(\\{input},\39\\{len},\39\\{laststate});{}$\7
 \&{if} ${}(\\{result}\I\\{nil}){}$\5
 ${}\{{}$\1\6
@@ -239,6 +242,11 @@ ${}\{{}$\1\6
 ${}\\{candidate}\K\\{result}\MG\\{val};{}$\6
 \X20:Write current candidate\X\6
 ${}\\{laststate}\K\\{result};{}$\6
+\4${}\}{}$\2\6
+\&{else} \&{if} ${}(\\{laststate}\I\\{nil}){}$\5
+${}\{{}$\1\6
+\X25:Flush input buffer until the but last character\X\6
+\&{goto} \\{search};\6
 \4${}\}{}$\2\par
 \U15.\fi
 
@@ -255,8 +263,8 @@ ${}\\{candidate}\K\\{laststate}\MG\\{val};{}$\2\6
 
 \M{19}\B\X19:Global states\X${}\E{}$\6
 \&{Rune} ${}{*}\\{candidate}{}$;\par
-\As22\ET26.
-\U28.\fi
+\As22\ET27.
+\U29.\fi
 
 \M{20}\B\X20:Write current candidate\X${}\E{}$\6
 \&{char} \\{buf}[\T{128}];\6
@@ -284,24 +292,30 @@ ${}\\{laststate}\K\\{nil}{}$;\par
 \M{24}\B\X24:Copy input character to input buffer\X${}\E{}$\6
 $\\{input}[\\{len}]\K\\{oldbuf}[\T{1}];{}$\6
 ${}\\{len}\MRL{+{\K}}\T{1};{}$\6
-${}\\{input}[\\{len}]\K\T{0}{}$;\par
+${}\\{input}[\\{len}]\K\.{'\\0'}{}$;\par
 \U15.\fi
 
-\M{25}\B\X25:Directly write to output\X${}\E{}$\6
+\M{25}\B\X25:Flush input buffer until the but last character\X${}\E{}$\6
+$\\{input}[\T{0}]\K\\{input}[\\{len}-\T{1}];{}$\6
+${}\\{input}[\T{1}]\K\.{'\\0'};{}$\6
+${}\\{len}\K\T{1}{}$;\par
+\U17.\fi
+
+\M{26}\B\X26:Directly write to output\X${}\E{}$\6
 $\\{write}(\\{outfd},\39\\{oldbuf},\39\|n){}$;\par
 \U15.\fi
 
-\M{26}\B\X19:Global states\X${}\mathrel+\E{}$\6
+\M{27}\B\X19:Global states\X${}\mathrel+\E{}$\6
 \&{int} \\{natural}${}\K\T{0}{}$;\par
 \fi
 
-\N{1}{27}Program entry. A standard Plan9 C program would use these headers.
+\N{1}{28}Program entry. A standard Plan9 C program would use these headers.
 \Y\B\8\#\&{include} \.{<u.h>}\6
 \8\#\&{include} \.{<libc.h>}\6
 \8\#\&{include} \.{<ctype.h>}\par
 \fi
 
-\M{28}The \PB{\\{main}(\,)} function starts the daemon process and call \PB{%
+\M{29}The \PB{\\{main}(\,)} function starts the daemon process and call \PB{%
 \\{exits}(\\{nil})}.
 
 \Y\B\X7:Declarations\X\6
@@ -320,7 +334,7 @@ ${}\{{}$\1\6
 \4${}\}{}$\2\par
 \fi
 
-\N{1}{29}Bugs. The translation could fail if typing is too fast.
+\N{1}{30}Bugs. The translation could fail if typing is too fast.
 \fi
 
 \inx

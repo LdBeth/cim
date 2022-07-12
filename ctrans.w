@@ -184,7 +184,10 @@ else if (oldbuf[1] == '\b') {
    @<Reset state@>@;
 }
 
-@ @<Search and...@>=
+@ The only |goto| statement in this program. It enables auto start
+of next input if the last character is already complete.
+@<Search and...@>=
+search:
 Map *result = match(input, len, laststate);
 if (result != nil) {
    if (laststate != nil)
@@ -192,6 +195,9 @@ if (result != nil) {
    candidate = result->val;
    @<Write current candidate@>@;
    laststate = result;
+} else if (laststate != nil) {
+   @<Flush input buffer...@>@;
+   goto search;
 }
 
 @ @<Rotate selection@>=
@@ -226,7 +232,12 @@ laststate = nil;
 @ @<Copy input character...@>=
 input[len] = oldbuf[1];
 len += 1;
-input[len]=0;
+input[len]='\0';
+
+@ @<Flush input buffer until the but last character@>=
+input[0] = input[len-1];
+input[1]= '\0';
+len = 1;
 
 @ @<Directly...@>=
 write(outfd,oldbuf,n);
