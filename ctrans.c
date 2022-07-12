@@ -135,7 +135,7 @@ input[len]= '\0';
 /*17:*/
 #line 189 "ctrans.w"
 
-search:
+Search:
 Map*result= match(input,len,laststate);
 if(result!=nil){
 if(laststate!=nil)
@@ -170,7 +170,7 @@ len= 1;
 /*:25*/
 #line 199 "ctrans.w"
 
-goto search;
+goto Search;
 }
 
 /*:17*/
