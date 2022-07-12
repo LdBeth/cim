@@ -55,10 +55,18 @@ to |newkbd| when possible.
 @<Key translation loop@>=
 while ((n = read(kbd, buf, sizeof(buf))) > 0) {
   buf[n-1] = 0;
-  if(n < 2 || buf[0] != 'c')@|
-    write(newkbd,buf,n);
-  else nextstate(buf, n, newkbd);
+  int bg, len;
+  for (bg = 0; bg < n; bg += len) {
+    @<Find segment length@>@;
+    if(len < 2 || buf[bg] != 'c')@|
+      write(newkbd,&buf[bg],len);
+    else nextstate(&buf[bg], len, newkbd);
+  }
 }
+
+@ @<Find segment...@>=
+len = 1;
+while (!buf[bg+len]) len++;
 
 @ @<Variables@>=
 int n;
@@ -287,4 +295,4 @@ const Map *result = match(argv[1], strlen(argv[1]), nil);
 if (result == nil) print("not found!\n");
 else print("%S\n", result->val);
 
-@*Bugs. The translation could fail if typing is too fast.
+@*Bugs or known issue. There is no known issue for this version.
