@@ -2,8 +2,8 @@
 \ZZ {Introduction}{1}{1}{1}{Introduction}
 \ZZ {Setup keyboard I/O}{1}{2}{2}{Setup keyboard I\/O}
 \ZZ {Dictionary}{1}{7}{3}{Dictionary}
-\ZZ {State machine}{1}{15}{5}{State machine}
-\ZZ {Program entry}{1}{28}{8}{Program entry}
-\ZZ {Bugs}{1}{30}{9}{Bugs}
+\ZZ {State machine}{1}{16}{5}{State machine}
+\ZZ {Program entry}{1}{29}{8}{Program entry}
+\ZZ {Bugs}{1}{31}{9}{Bugs}
 
 \catcode `\@=12\relax 

@@ -1,42 +1,44 @@
-\I\X21:Backspace\X
-\Us17\ET18.
-\I\X24:Copy input character to input buffer\X
-\U15.
-\I\X7, 8:Declarations\X
-\U29.
-\I\X26:Directly write to output\X
-\U15.
-\I\X14:First none \PB{\\{nil}} key until next \PB{\\{nil}}\X
+\I\X23:Backspace\X
+\Us19\ET20.
+\I\X14:Compute keycode\X
 \U13.
-\I\X25:Flush input buffer until the but last character\X
-\U17.
-\I\X19, 22, 27:Global states\X
-\U29.
-\I\X16:Handle mode change and selection\X
-\U15.
+\I\X26:Copy input character to input buffer\X
+\U16.
+\I\X7, 8:Declarations\X
+\U30.
+\I\X28:Directly write to output\X
+\U16.
+\I\X15:First none \PB{\T{0}} key until next \PB{\T{0}}\X
+\U13.
+\I\X27:Flush input buffer until the but last character\X
+\U19.
+\I\X18, 21, 24:Global states\X
+\U30.
+\I\X17:Handle mode change and selection\X
+\U16.
 \I\X5:Key translation loop\X
-\U29.
+\U30.
 \I\X13:Linear search\X
 \U11.
 \I\X9:Lookup in \PB{\\{lvl1}}\X
 \U11.
 \I\X10:Lookup in \PB{\\{lvl2}}\X
 \U11.
-\I\X23:Reset state\X
+\I\X25:Reset state\X
+\U17.
+\I\X20:Rotate selection\X
+\U17.
+\I\X19:Search and output\X
 \U16.
-\I\X18:Rotate selection\X
-\U16.
-\I\X17:Search and output\X
-\U15.
 \I\X2:Setup keyboard\X
-\U29.
+\U30.
 \I\X4:Shadowing {\tt/dev/kbd}\X
 \U2.
 \I\X12:Speedup with \PB{\\{lvl2}}\X
 \U11.
-\I\X11, 15:Subroutines\X
-\U29.
+\I\X11, 16:Subroutines\X
+\U30.
 \I\X3, 6:Variables\X
-\U29.
-\I\X20:Write current candidate\X
-\Us17\ET18.
+\U30.
+\I\X22:Write current candidate\X
+\Us19\ET20.
