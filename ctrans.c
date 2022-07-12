@@ -171,7 +171,7 @@ len= 1;
 /*:25*/
 #line 200 "ctrans.w"
 
-lastestate= nil;
+laststate= nil;
 goto Search;
 }
 
