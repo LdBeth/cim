@@ -198,6 +198,7 @@ if (result != nil) {
    laststate = result;
 } else if (laststate != nil) {
    @<Flush input buffer...@>@;
+   lastestate = nil;
    goto Search;
 }
 
