@@ -309,8 +309,19 @@ char buf[128];
 #line 272 "ctrans.w"
 ;
 
-USED(argc);
-USED(argv);
+if(argc> 1){
+/*31:*/
+#line 285 "ctrans.w"
+
+const Map result= match(argv[1],strlen(argv[1]),nil);
+if(result==nil)print("not found!\n");
+else print("%S\n",result.val);
+
+/*:31*/
+#line 275 "ctrans.w"
+
+exits(nil);
+}
 
 /*2:*/
 #line 30 "ctrans.w"
@@ -333,7 +344,7 @@ unmount(nil,"/n/temp");
 
 
 /*:2*/
-#line 277 "ctrans.w"
+#line 279 "ctrans.w"
 
 if(fork())exits(nil);
 
@@ -348,7 +359,7 @@ else nextstate(buf,n,newkbd);
 }
 
 /*:5*/
-#line 280 "ctrans.w"
+#line 282 "ctrans.w"
 
 }
 

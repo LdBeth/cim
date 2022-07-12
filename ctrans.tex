@@ -337,8 +337,11 @@ $\\{write}(\\{outfd},\39\\{oldbuf},\39\|n){}$;\par
 \2{}$\6
 ${}\{{}$\1\6
 \X3:Variables\X;\6
-\.{USED}(\\{argc});\6
-\.{USED}(\\{argv});\6
+\&{if} ${}(\\{argc}>\T{1}){}$\5
+${}\{{}$\1\6
+\X31:Test dictionary\X\6
+\\{exits}(\\{nil});\6
+\4${}\}{}$\2\6
 \X2:Setup keyboard\X\6
 \&{if} (\\{fork}(\,))\1\5
 \\{exits}(\\{nil});\2\6
@@ -346,7 +349,16 @@ ${}\{{}$\1\6
 \4${}\}{}$\2\par
 \fi
 
-\N{1}{31}Bugs. The translation could fail if typing is too fast.
+\M{31}\B\X31:Test dictionary\X${}\E{}$\6
+\&{const} \&{Map} \\{result}${}\K\\{match}(\\{argv}[\T{1}],\39\\{strlen}(%
+\\{argv}[\T{1}]),\39\\{nil});{}$\7
+\&{if} ${}(\\{result}\E\\{nil}){}$\1\5
+\\{print}(\.{"not\ found!\\n"});\2\6
+\&{else}\1\5
+${}\\{print}(\.{"\%S\\n"},\39\\{result}.\\{val}){}$;\2\par
+\U30.\fi
+
+\N{1}{32}Bugs. The translation could fail if typing is too fast.
 \fi
 
 \inx

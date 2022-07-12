@@ -271,13 +271,20 @@ write(outfd,oldbuf,n);
 void main(int argc, char **argv) {
   @<Variables@>;
 
-  USED(argc);
-  USED(argv);
+  if (argc > 1) {
+     @<Test dictionary@>@;
+     exits(nil);
+  }
 
   @<Setup keyboard@>@;
   if(fork()) exits(nil);
 
   @<Key translation loop@>@;
 }
+
+@ @<Test dictionary@>=
+const Map result = match(argv[1], strlen(argv[1]), nil);
+if (result == nil) print("not found!\n");
+else print("%S\n", result.val);
 
 @*Bugs. The translation could fail if typing is too fast.
