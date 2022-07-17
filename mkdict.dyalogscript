@@ -8,7 +8,7 @@
  ⎕←'const int lvl1[] = {'
  idx←∪,table[;1]
  fmt←{('-'@('¯'∘=))'I5,<,>'⎕FMT(¯1@((≢idx)∘=))⍵}
- ⎕←fmt idx⍳↓⍪⎕c⎕a
+ ⎕←fmt((1∘↑)¨idx)⍳↓⍪⎕c⎕a
  ⎕←'};'
  ⎕←'const int lvl2[] = {'
  lv2←((2∘↑)¨idx)⍳al2←{(⎕C ⎕A)[(26 26)⊤⍵]}¨⍳26×26
