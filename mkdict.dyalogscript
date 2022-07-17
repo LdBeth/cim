@@ -6,10 +6,11 @@
  ⎕←'typedef struct Map Map;'
  ⎕←'struct Map { int key; Rune *val; };'
  ⎕←'const int lvl1[] = {'
- ⎕←'I5,<,>'⎕FMT(,table[;1])⍳↓⍪⎕c⎕a
+ idx←∪,table[;1]
+ ⎕←'I5,<,>'⎕FMT idx⍳↓⍪⎕c⎕a
  ⎕←'};'
  ⎕←'const int lvl2[] = {'
- lv2←(¯1@((≢table[;1])∘=))((2∘↑)¨,table[;1])⍳al2←{(⎕C ⎕A)[(26 26)⊤⍵]}¨⍳26×26
+ lv2←(¯1@((≢table[;1])∘=))((2∘↑)¨idx)⍳al2←{(⎕C ⎕A)[(26 26)⊤⍵]}¨⍳26×26
  ⍝ ⎕←'//' (lv2<0)/al2
  ⎕←('-'@('¯'∘=))'I5,<,>'⎕FMT lv2
  ⎕←'};'
