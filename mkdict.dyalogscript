@@ -1,5 +1,5 @@
  ⎕io←0
- table←⎕CSV'UnihanCangjieTable.txt'
+ table←⎕CSV(1⌷2⎕NQ#'GetCommandLineArgs')
  table←table[⍋table[;1];]
  encode←{+/(2*10 5 0)×(' ',⎕c⎕a)⍳3↑2↓⍵}
  ⎕←'#include <u.h>'
@@ -7,12 +7,13 @@
  ⎕←'struct Map { int key; Rune *val; };'
  ⎕←'const int lvl1[] = {'
  idx←∪,table[;1]
- ⎕←'I5,<,>'⎕FMT idx⍳↓⍪⎕c⎕a
+ fmt←{('-'@('¯'∘=))'I5,<,>'⎕FMT(¯1@((≢idx)∘=))⍵}
+ ⎕←fmt idx⍳↓⍪⎕c⎕a
  ⎕←'};'
  ⎕←'const int lvl2[] = {'
- lv2←(¯1@((≢idx)∘=))((2∘↑)¨idx)⍳al2←{(⎕C ⎕A)[(26 26)⊤⍵]}¨⍳26×26
+ lv2←((2∘↑)¨idx)⍳al2←{(⎕C ⎕A)[(26 26)⊤⍵]}¨⍳26×26
  ⍝⎕←(lv2<0)/al2
- ⎕←('-'@('¯'∘=))'I5,<,>'⎕FMT lv2
+ ⎕←fmt lv2
  ⎕←'};'
  ⎕←'const Map dict[] = {'
  ⎕←(table[;1]{(encode⊃⍺)(',L"',(⊃,/⍵),'",')}⌸ table[;0])
