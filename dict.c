@@ -1,4 +1,5 @@
 #include <u.h>
+typedef struct Map Map;
 struct Map { int key; Rune *val; };
 const int lvl1[] = {
     0,
@@ -26,7 +27,7 @@ const int lvl1[] = {
 26280,
 29212,
 27511,
-29212
+29212,
 };
 const int lvl2[] = {
     2,
@@ -704,7 +705,7 @@ const int lvl2[] = {
    -1,
 29189,
    -1,
-   -1
+   -1,
 };
 const Map dict[] = {
     0  ,L"日曰",     
@@ -27776,4 +27777,4 @@ const Map dict[] = {
  3680  ,L"’",      
  3712  ,L"“",      
  3744  ,L"”",      
-};
+0};
