@@ -19,6 +19,13 @@ implement and way easier to use when there is no prompt.
 @.rio@>
 @.cim@>
 
+@ Cangjie input method was developed by Chu Bong-Foo in Taiwan and
+released as copyright free software. The code scheme maps 26 alphabets
+to 24 shapes and 2 special keys, `Z' and `X'. `Z' is auxiliary code
+for punctuation. `X' means ``difficult-to-decompose'' part.
+
+\hbox{\pdfximage{table.pdf}\pdfrefximage\pdflastximage}
+
 @*Setup keyboard I/O. See {\tt kbdfs(8)}. Reading {\tt /dev/kbd} gives
 keycodes and the {\tt c} messages are what we want to process. Besides
 handling the event produced by the operating system, we need also to
